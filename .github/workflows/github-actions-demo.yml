@@ -3,6 +3,7 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-20.04
+    name: Test
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -17,6 +18,7 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
   create_build_artifact:
     runs-on: ubuntu-20.04
+    name: Build
     steps:
         run: echo y | sudo apt install jq
         run: echo y | sudo apt install zip
