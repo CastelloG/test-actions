@@ -20,19 +20,14 @@ jobs:
     runs-on: ubuntu-20.04
     name: Build
     steps:
-      - run: echo y | sudo apt install jq
       - run: echo y | sudo apt install zip
       - name: Check out repository code
         uses: actions/checkout@v2
-      - run: echo ${{ env.BUILD_VERSION }}
       - run: npm i --only=prod
       - run: npm run build
-      - run: zip -r "app-$(jq .version package.json | sed -e 's/"//g').zip" build
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
+      - run: zip -r "app.zip" build
       - name: Upload output file
         uses: actions/upload-artifact@v2
         with:
-          name: build-$(jq .version package.json | sed -e 's/"//g').zip
-          path: app-$(jq .version package.json | sed -e 's/"//g').zip
+          name: build.zip
+          path: build.zip
