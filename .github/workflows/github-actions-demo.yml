@@ -16,7 +16,7 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
   create-build-artifact:
-    name: Creat artifact
+    runs-on: ubuntu-20.04
     steps:
         run: echo y | sudo apt install jq
         run: echo y | sudo apt install zip
