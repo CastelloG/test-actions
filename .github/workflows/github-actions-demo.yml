@@ -24,17 +24,15 @@ jobs:
       - run: echo y | sudo apt install zip
       - name: Check out repository code
         uses: actions/checkout@v2
-        env:
-          BUILD_VERSION: $(jq .version package.json | sed -e 's/"//g')
       - run: echo ${{ env.BUILD_VERSION }}
       - run: npm i --only=prod
       - run: npm run build
-      - run: zip -r "app-${{ env.BUILD_VERSION }}.zip" build
+      - run: zip -r "app-$(jq .version package.json | sed -e 's/"//g').zip" build
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
       - name: Upload output file
         uses: actions/upload-artifact@v2
         with:
-          name: build-$(echo ${{ env.BUILD_VERSION }}).zip
-          path: app-$(echo ${{ env.BUILD_VERSION }}).zip
+          name: build-$(jq .version package.json | sed -e 's/"//g').zip
+          path: app-$(jq .version package.json | sed -e 's/"//g').zip
