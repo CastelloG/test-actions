@@ -25,9 +25,10 @@ jobs:
         uses: actions/checkout@v2
       - run: npm i --only=prod
       - run: npm run build
-      - run: zip -r "app.zip" build
+      - name: Zip build output
+        run: zip -r "app.zip" build
       - name: Upload output file
         uses: actions/upload-artifact@v2
         with:
-          name: build.zip
-          path: build.zip
+          name: app.zip
+          path: app.zip
