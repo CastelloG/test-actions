@@ -22,6 +22,8 @@ jobs:
     steps:
       - run: echo y | sudo apt install jq
       - run: echo y | sudo apt install zip
+      - name: Check out repository code
+        uses: actions/checkout@v2
       - run: BUILD_VERSION = $(jq .version package.json)
       - run: npm run build
       - run: zip -r app-$(printenv BUILD_VERSION).zip build
