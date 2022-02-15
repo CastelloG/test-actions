@@ -15,3 +15,16 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  create-build-artifact:
+    name: Creat artifact
+    steps:
+        run: echo y | sudo apt install jq
+        run: echo y | sudo apt install zip
+        run: BUILD_VERSION = $(jq .version package.json)
+        run: npm run build
+        run: zip -r app-$(printenv BUILD_VERSION).zip build
+      - name: Upload output file
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-$(printenv BUILD_VERSION).zip
+          path: app-$(printenv BUILD_VERSION).zip
