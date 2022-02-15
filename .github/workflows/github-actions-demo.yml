@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-20.04
     name: Build
     steps:
-        run: echo y | sudo apt install jq
-        run: echo y | sudo apt install zip
-        run: BUILD_VERSION = $(jq .version package.json)
-        run: npm run build
-        run: zip -r app-$(printenv BUILD_VERSION).zip build
+      - run: echo y | sudo apt install jq
+      - run: echo y | sudo apt install zip
+      - run: BUILD_VERSION = $(jq .version package.json)
+      - run: npm run build
+      - run: zip -r app-$(printenv BUILD_VERSION).zip build
       - name: Upload output file
         uses: actions/upload-artifact@v2
         with:
