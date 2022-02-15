@@ -27,12 +27,12 @@ jobs:
       - run: BUILD_VERSION=$(jq .version package.json)
       - run: npm i --only=prod
       - run: npm run build
-      - run: zip -r app-$(echo BUILD_VERSION).zip build
+      - run: zip -r app-$(echo $BUILD_VERSION).zip build
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
       - name: Upload output file
         uses: actions/upload-artifact@v2
         with:
-          name: build-$(echo BUILD_VERSION).zip
-          path: app-$(echo BUILD_VERSION).zip
+          name: build-$(echo $BUILD_VERSION).zip
+          path: app-$(echo $BUILD_VERSION).zip
