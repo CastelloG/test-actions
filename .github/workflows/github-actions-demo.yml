@@ -24,6 +24,9 @@ jobs:
       - run: echo y | sudo apt install zip
       - name: Check out repository code
         uses: actions/checkout@v2
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
       - run: BUILD_VERSION = $(jq .version package.json)
       - run: npm run build
       - run: zip -r app-$(printenv BUILD_VERSION).zip build
