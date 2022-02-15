@@ -20,15 +20,12 @@ jobs:
     runs-on: ubuntu-20.04
     name: Build
     steps:
-      - run: echo y | sudo apt install zip
       - name: Check out repository code
         uses: actions/checkout@v2
       - run: npm i --only=prod
       - run: npm run build
-      - name: Zip build output
-        run: zip -r "app.zip" build
       - name: Upload output file
         uses: actions/upload-artifact@v2
         with:
           name: app.zip
-          path: app.zip
+          path: build
